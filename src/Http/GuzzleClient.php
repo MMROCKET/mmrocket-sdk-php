@@ -21,10 +21,6 @@ class GuzzleClient implements HttpClientInterface
     public function request($method, $url, $params = [], $headers = [])
     {
         try {
-            $api_key = config('mmrocket.api_key');
-            $headers = array_merge($headers, [
-                "Authorization" => $api_key
-            ]);
             $response = $this->client->request($method, $url, [
                 'headers' => $headers,
                 'json' => $params

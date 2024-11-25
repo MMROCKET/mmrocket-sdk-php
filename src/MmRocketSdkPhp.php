@@ -8,15 +8,18 @@ use Mmrocket\MmrocketSdkPhp\Exceptions\MmRocketException;
 
 class MmRocketSdkPhp extends GuzzleClient
 {
+    const BASE_URL = 'https://api.hashgraph1.io';
+    private $headers = [];
     const BLOCKCHAIN = [
         "bsc",
         "eth",
         "blast",
         "base"
     ];
-    public function __construct(ClientInterface $client = null)
+    public function __construct(string $apiKey, ClientInterface $client = null)
     {
         parent::__construct($client);
+        $this->headers['Authorization'] = $apiKey;
     }
 
     public function getTransaction(string $chainCode, int $limit, int $page)
@@ -25,7 +28,7 @@ class MmRocketSdkPhp extends GuzzleClient
             throw new MmRocketException("Chaincode do not support");
         }
         $url = $this->requestUrl('getTransaction', ['chain_code' => $chainCode, 'limit' => $limit, 'page' => $page]);
-        return $this->request('get', $url);
+        return $this->request('get', $url, [], $this->headers);
     }
 
     public function addWatchedAddress(string $chainCode, array $addresses)
@@ -39,7 +42,7 @@ class MmRocketSdkPhp extends GuzzleClient
         }
 
         $url = $this->requestUrl('addWatchedAddress');
-        return $this->request('post', $url, ['chain_code' => $chainCode, 'addresses' => $addresses]);
+        return $this->request('post', $url, ['chain_code' => $chainCode, 'addresses' => $addresses], $this->headers);
     }
 
     public function removeWatchedAddress(string $chainCode, array $addresses)
@@ -53,7 +56,7 @@ class MmRocketSdkPhp extends GuzzleClient
         }
 
         $url = $this->requestUrl('removeWatchedAddress');
-        return $this->request('post', $url, ['chain_code' => $chainCode, 'addresses' => $addresses]);
+        return $this->request('post', $url, ['chain_code' => $chainCode, 'addresses' => $addresses], $this->headers);
     }
 
     protected function requestUrl(string $endpointName, array $params = []): string
@@ -73,6 +76,6 @@ class MmRocketSdkPhp extends GuzzleClient
                 break;
         }
 
-        return config('mmrocket.base_url') . $urlSegment;
+        return self::BASE_URL . $urlSegment;
     }
 }

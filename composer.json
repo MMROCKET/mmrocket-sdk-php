@@ -23,12 +23,5 @@
     "require": {
         "php": "^7.0|^8.0",
         "guzzlehttp/guzzle": "^6.5|^7.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Mmrocket\\MmrocketSdkPhp\\MmRocketServiceProvider"
-            ]
-        }
     }
 }
