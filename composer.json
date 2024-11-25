@@ -1,0 +1,34 @@
+{
+    "name": "mmrocket/mmrocket-sdk-php",
+    "description": "mmrocket package",
+    "keywords": [
+        "mmrocket",
+        "wallet tracking",
+        "blockchain tracking"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mmrocket\\MmrocketSdkPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Linh Nguyen",
+            "email": "linhdev92@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0|^8.0",
+        "guzzlehttp/guzzle": "^6.5|^7.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mmrocket\\MmrocketSdkPhp\\MmRocketServiceProvider"
+            ]
+        }
+    }
+}
