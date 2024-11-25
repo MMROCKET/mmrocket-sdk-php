@@ -8,7 +8,6 @@ use Mmrocket\MmrocketSdkPhp\Exceptions\MmRocketException;
 
 class MmRocketSdkPhp extends GuzzleClient
 {
-    const VERSION = '3';
     const BLOCKCHAIN = [
         "bsc",
         "eth",
